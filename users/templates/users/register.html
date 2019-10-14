@@ -1,0 +1,32 @@
+<!--extending base template and filling in content block -->
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+<!--wrapping for loop in a content block-->
+{% block content %}
+<h1>Registration Page</h1>
+<!-- this part just for styling  -->
+<div class="content section">
+    <!-- adding CSRF will protect our form from attacks -->
+    <form method="POST">
+        {% csrf_token %}
+        <!-- a legend for our form with bootstrap classes-->
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Join our community today.</legend>
+            <!-- this will display all of the form labels and fields that we need | 'as_p' will render
+            our form in paragraph tags-->
+            {{ form|crispy }}
+        </fieldset>
+        <!-- adding a submit button -->
+        <div class="form group">
+            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <!-- text-muted in bootstrap is a dull text -->
+        <small class="text-muted">
+            Already have an acoount? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+        </small>
+    </div>
+</div>
+
+{% endblock content %}

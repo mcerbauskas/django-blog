@@ -1,3 +1,4 @@
+from .models import Post
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -18,11 +19,14 @@ posts = [
     }
 ]
 
+
+# run a query on our Post model and pass in the data from sql instead
 #function to handle the traffic from the home page of our blog
 def home(request):
     #creating a dictionary with key 'posts'
     context = {
-        'posts': posts
+        # 'posts' : posts
+        'posts': Post.objects.all()
     }
 
     # vietoje return HttpResponse('<h1>Blog Home </h1>')

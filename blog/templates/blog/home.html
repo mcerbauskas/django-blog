@@ -4,15 +4,31 @@
 <!--wrapping for loop in a content block-->
 {% block content %}
     {% for post in posts %}
-        <article class="media content-section">
-        <div class="media-body">
-        <div class="article-metadata">
-        <a class="mr-2" href="#">{{ post.author }}</a>
-        <small class="text-muted">{{ post.date_posted }}</small>
-        </div>
-        <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-        <p class="article-content">{{ post.content }}</p>
-        </div>
+        <!--<article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                <a class="mr-2" href="#">{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted | date:"F d, Y" }}</small>
+                </div>
+            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+            </div>
         </article>
+-->
+<article class="media content-section">
+<div class="media-body">
+    <div class="article-metadata">
+    <ul class="list-unstyled">
+        <li class="media">
+            <img class="mr-3" src="..." alt="Generic placeholder image">
+            <div class="media-body">
+            <h5 class="mt-0 mb-1">List-based media object</h5>
+      Cras sit amettudin. Cras pnunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            </div>
+        </li>
+    </ul>
+    </div>
+</div>
+</article>
     {% endfor %}
 {% endblock content %} <!-- we could skip the word 'content' but in this way it's more clear which block we close -->

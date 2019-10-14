@@ -1,0 +1,7 @@
+<!--extending base template and filling in content block -->
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!--user - django's built in variable that represents current logged in user-->
+<h1>{{ user.username }}</h1>
+{% endblock content %}

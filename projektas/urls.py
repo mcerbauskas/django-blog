@@ -14,13 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include    #importing 'include' function from django urls
+from django.urls import path, include    # importing 'include' function from django urls
+from users import views as user_views
+from django.contrib.auth import views as auth_views  # django's provided login logout views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #if '/blog/about' is accessed, sending requester to blog.urls
-    #while chopping out the 'blog' part as its already matched
-    #leaving first var empty - matches the empty path in our projektas url and blog url
-    path('', include('blog.urls'))
+    # if '/blog/about' is accessed, sending requester to blog.urls
+    # while chopping out the 'blog' part as its already matched
+    # leaving first var empty - matches the empty path in our projektas url and blog url
+    path('', include('blog.urls')),
+    path('register/', user_views.register, name='register'),
+    # creating "class based" login logout views
+    path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
+    # if we would've left as_view() return value empty, django would give us a default admin logout page
+    path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('profile/', user_views.profile, name='profile')
 
 ]

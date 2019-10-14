@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,16 +14,17 @@
 
     <meta charset="UTF-8">
     {% if title %}
-    <title>Django Blog - {{ title }}</title>
+    <title>CarList - {{ title }}</title>
     {% else %}
-    <title>Django Blog</title>
+    <title>CarList</title>
     {% endif %}
 </head>
+
 <body>
     <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-        <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Django Blog</a>
+        <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">CarList Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -37,8 +37,14 @@
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
-            <a class="nav-item nav-link" href="#">Login</a>
-            <a class="nav-item nav-link" href="#">Register</a>
+                <!-- checking if the user is authenticated -->
+                {% if user.is_authenticated %}
+                    <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                    <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                    <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
             </div>
         </div>
         </div>
@@ -48,19 +54,30 @@
     <main role="main" class="container">
     <div class="row">
     <div class="col-md-8">
+        {% if messages  %}
+            {% for message in messages %}
+            <!--bootstrap design will be whatever the message will be (info, debug, warning, error etc.-->
+                <div class="alert alert-{{ message.tags }}">
+                    <!-- just printing out the message -->
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
       {% block content %}{% endblock %}
     </div>
     <div class="col-md-4">
       <div class="content-section">
-        <h3>Our Sidebar</h3>
-        <p class='text-muted'>You can put any information here you'd like.
+        <h3>Top Trending</h3>
+          <p class='text-muted'>You can put any information here you'd like.
+          <!--
           <ul class="list-group">
             <li class="list-group-item list-group-item-light">Latest Posts</li>
             <li class="list-group-item list-group-item-light">Announcements</li>
             <li class="list-group-item list-group-item-light">Calendars</li>
             <li class="list-group-item list-group-item-light">etc</li>
           </ul>
-        </p>
+          -->
+          </p>
       </div>
     </div>
     </div>
