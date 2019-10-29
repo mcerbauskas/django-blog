@@ -2,7 +2,7 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<h1>Registration Page</h1>
+<h1>List a Car</h1>
 <!-- this part just for styling  -->
 <div class="content section">
     <!-- adding CSRF will protect our form from attacks -->
@@ -10,20 +10,15 @@
         {% csrf_token %}
         <!-- a legend for our form with bootstrap classes-->
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Join our community today.</legend>
+            <legend class="border-bottom mb-4">Fill in the details</legend>
             <!-- this will display all of the form labels and fields that we need | 'as_p' will render
             our form in paragraph tags-->
             {{ form|crispy }}
         </fieldset>
         <div class="form group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            <button class="btn btn-outline-info" type="submit">Post</button>
         </div>
     </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already have an acoount? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-        </small>
-    </div>
 </div>
 
 {% endblock content %}

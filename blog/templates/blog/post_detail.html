@@ -1,0 +1,19 @@
+<!-- writing python code in these blocks, must have and 'end' for each loop (ex. endif and so on) -->
+<!-- double curly braces for accesing variables -->
+{% extends "blog/base.html" %}
+<!--wrapping for loop in a content block-->
+{% block content %}
+    <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{object.authors.profile.image.url}}">
+        <div class="media-body">
+            <div class="article-metadata">
+            <!-- DetailView expects the content of this template to be called objects, so changing
+            'post' to 'object'-->
+            <a class="mr-2" href="#">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_posted | date:"F d, Y" }}</small>
+            </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+        <p class="article-content">{{ object.content }}</p>
+        </div>
+    </article>
+{% endblock content %} <!-- we could skip the word 'content' but in this way it's more clear which block we close -->

@@ -16,3 +16,4 @@ class Post(models.Model):
     # to make posts more desciptive
     def __str__(self):
         return self.title
+

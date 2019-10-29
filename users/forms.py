@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Profile
+
 
 # UserRegisterForm inherits from UserCreationForm
 class UserRegisterForm(UserCreationForm):
@@ -14,4 +16,19 @@ class UserRegisterForm(UserCreationForm):
         model = User
         # fields that want to be shown on the form
         fields = ['username', 'email', 'password1', 'password2']
+
+
+# creating a model form which allows us to create a form that will work with a specific DB model
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
 
